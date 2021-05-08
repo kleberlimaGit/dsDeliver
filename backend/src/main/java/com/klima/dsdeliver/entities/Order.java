@@ -16,8 +16,16 @@ import javax.persistence.Table;
 
 import com.klima.dsdeliver.entities.enums.OrderStatus;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name = "tb_order")
+@Setter
+@Getter
+@NoArgsConstructor
+
 public class Order implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -38,9 +46,6 @@ public class Order implements Serializable{
 			inverseJoinColumns = @JoinColumn(name = "product_id"))
 	private Set<Product> products = new HashSet<>();
 	
-	public Order() {
-		
-	}
 
 	public Order(Long id, String address, Double latitude, Double longitude, Instant moment, OrderStatus status,
 			Double total) {
@@ -53,65 +58,6 @@ public class Order implements Serializable{
 		this.total = total;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public Double getLatitude() {
-		return latitude;
-	}
-
-	public void setLatitude(Double latitude) {
-		this.latitude = latitude;
-	}
-
-	public Double getLongitude() {
-		return longitude;
-	}
-
-	public void setLongitude(Double longitude) {
-		this.longitude = longitude;
-	}
-
-	public Instant getMoment() {
-		return moment;
-	}
-
-	public void setMoment(Instant moment) {
-		this.moment = moment;
-	}
-
-	public OrderStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(OrderStatus status) {
-		this.status = status;
-	}
-
-	public Double getTotal() {
-		return total;
-	}
-
-	public void setTotal(Double total) {
-		this.total = total;
-	}
-
-	public Set<Product> getProducts() {
-		return products;
-	}
 
 	@Override
 	public int hashCode() {
@@ -120,6 +66,7 @@ public class Order implements Serializable{
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -137,6 +84,8 @@ public class Order implements Serializable{
 			return false;
 		return true;
 	}
+
+
 	
 	
 	
