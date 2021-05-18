@@ -13,6 +13,8 @@ import org.springframework.web.client.ResourceAccessException;
 import com.klima.dsdeliver.dto.ProductDTO;
 import com.klima.dsdeliver.entities.Product;
 import com.klima.dsdeliver.repositories.ProductRepository;
+import com.klima.dsdeliver.service.exceptions.DatabaseException;
+import com.klima.dsdeliver.service.exceptions.ResourceNotFoundException;
 
 @Service
 @Transactional
@@ -56,10 +58,10 @@ public class ProductService {
 			repository.deleteById(id);
 		}
 		catch (EmptyResultDataAccessException e) {
-			throw new ResourceAccessException("identificador não encontrado. " + id);
+			throw new ResourceNotFoundException("identificador não encontrado. " + id);
 		}
 		catch (DataIntegrityViolationException e) {
-			throw new DataIntegrityViolationException("Violação de integridade");
+			throw new DatabaseException("Violação de integridade");
 		}
 	}
 	

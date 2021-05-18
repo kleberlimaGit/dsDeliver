@@ -2,6 +2,10 @@ package com.klima.dsdeliver.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.Size;
+
 import com.klima.dsdeliver.entities.Product;
 
 import lombok.Getter;
@@ -15,8 +19,12 @@ public class ProductDTO implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private Long id;
+	@Size(min = 5, max = 60, message = "O produto deve conter pelo menos 5 caracteres")
+	@NotBlank
 	private String name;
+	@Positive(message = "Valor não pode ser negativo")
 	private Double price;
+	@NotBlank(message = "Descrição não pode ser vazia")
 	private String description;
 	private String imageUri;
 	
