@@ -3,6 +3,8 @@ package com.klima.dsdeliver.controllers;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,7 +37,7 @@ public class ProductController {
 	}
 	
 	@PostMapping
-	public  ResponseEntity<ProductDTO> insertProduct(@RequestBody ProductDTO dto){
+	public  ResponseEntity<ProductDTO> insertProduct(@Valid @RequestBody ProductDTO dto){
 		dto = service.insertProduct(dto);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -45,7 +47,7 @@ public class ProductController {
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<ProductDTO> updateProduct(@PathVariable Long id,@RequestBody ProductDTO dto){
+	public ResponseEntity<ProductDTO> updateProduct(@PathVariable Long id, @Valid @RequestBody ProductDTO dto){
 		dto = service.updateProduct(id, dto);
 		return ResponseEntity.ok().body(dto);
 		
